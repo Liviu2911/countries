@@ -1,34 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react"
+import { useQuery } from "@tanstack/react-query"
+import Header from "./components/header"
+import Search from "./components/search"
+import Filters from "./components/filters"
+import "@fontsource-variable/nunito"
+import Countries from "./components/countries"
+
+export type CountryType = {
+  name: { common: string }
+  flags: { png: string }
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [darkMode, setDarkMode] = useState(false)
+  const changeDarkMode = (type: boolean) => setDarkMode(type)
+
+  const getData = async () => {
+    const res = await fetch("https://restcountries.com/v3.1/all")
+    const data = res.json()
+    return data
+  }
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["gettinDaData"],
+    queryFn: getData,
+  })
+
+  if (isLoading) return <h1>Gettin Da Countries Dawg...</h1>
+  if (error) return <h1>This error occured: {error.message}</h1>
+
+  console.log(data)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div
+      className={`z-10 w-screen h-screen overflow-x-hidden ${
+        darkMode ? "bg-stone-700" : "bg-stone-200"
+      } transition-3`}
+    >
+      <Header darkMode={darkMode} changeDarkMode={changeDarkMode} />
+
+      <div className="flex justify-between w-full">
+        <Search darkMode={darkMode} />
+        <Filters darkMode={darkMode} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <Countries countries={data} darkMode={darkMode} />
+    </div>
   )
 }
 
