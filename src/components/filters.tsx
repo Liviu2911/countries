@@ -4,9 +4,11 @@ import { BiChevronDown } from "react-icons/bi"
 
 type Props = {
   darkMode: boolean
+  activeFilter: string
+  updateFilter: (region: string) => void
 }
 
-function Filters({ darkMode }: Props) {
+function Filters({ darkMode, activeFilter, updateFilter }: Props) {
   const [open, setOpen] = useState(false)
   const animation = {
     initial: {
@@ -35,7 +37,7 @@ function Filters({ darkMode }: Props) {
             : "bg-white  text-stone-700 hover:text-stone-400"
         } flex flex-row w-56 justify-between items-center p-5 rounded  transition-3`}
       >
-        Filter by Region
+        {activeFilter !== "" ? activeFilter : "Filter by Region"}
         <span className="text-xl">
           <BiChevronDown />
         </span>
@@ -52,6 +54,7 @@ function Filters({ darkMode }: Props) {
             } rounded flex flex-col w-56 mt-2 gap-2 py-2 transition-3`}
           >
             <button
+              onClick={() => updateFilter("Africa")}
               className={`${
                 darkMode ? "text-stone-200" : "text-stone-700"
               } transition-3 hover:text-stone-400`}
@@ -59,13 +62,15 @@ function Filters({ darkMode }: Props) {
               Africa
             </button>
             <button
+              onClick={() => updateFilter("Americas")}
               className={`${
                 darkMode ? "text-stone-200" : "text-stone-700"
               } transition-3 hover:text-stone-400`}
             >
-              America
+              Americas
             </button>
             <button
+              onClick={() => updateFilter("Asia")}
               className={`${
                 darkMode ? "text-stone-200" : "text-stone-700"
               } transition-3 hover:text-stone-400`}
@@ -73,6 +78,7 @@ function Filters({ darkMode }: Props) {
               Asia
             </button>
             <button
+              onClick={() => updateFilter("Europe")}
               className={`${
                 darkMode ? "text-stone-200" : "text-stone-700"
               } transition-3 hover:text-stone-400`}
@@ -80,11 +86,20 @@ function Filters({ darkMode }: Props) {
               Europe
             </button>
             <button
+              onClick={() => updateFilter("Oceania")}
               className={`${
                 darkMode ? "text-stone-200" : "text-stone-700"
               } transition-3 hover:text-stone-400`}
             >
               Oceania
+            </button>
+            <button
+              onClick={() => updateFilter("")}
+              className={`${
+                darkMode ? "text-stone-200" : "text-stone-700"
+              } transition-3 hover:text-stone-400`}
+            >
+              All
             </button>
           </motion.div>
         )}
