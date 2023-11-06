@@ -19,7 +19,7 @@ function Search({
     <div
       className={`${
         !darkMode ? "bg-white" : "bg-stone-800"
-      } sm:m-16 ml-auto mr-auto mt-4 w-72 sm:w-[450px] sm:h-[52px] h-10 rounded-[6px] flex items-center pl-8 gap-4`}
+      } sm:m-16 ml-auto mr-auto mt-4 w-80 sm:w-[450px] sm:h-[52px] h-10 sm:rounded-[6px] rounded-[3px] flex items-center pl-8 gap-4 z-10`}
     >
       <button
         onClick={() => search()}

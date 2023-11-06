@@ -5,18 +5,20 @@ import { CountryType } from "../../App"
 type Props = {
   countries: CountryType[]
   darkMode: boolean
-  // activateCountry: (country: CountryType) => void
+  updateCountry: (country: CountryType) => void
 }
 
-function Countries({ countries, darkMode }: Props) {
+function Countries({ countries, darkMode, updateCountry }: Props) {
   return (
-    <div className={`grid grid-cols-4 w-full overflow-x-hidden`}>
+    <div
+      className={`sm:grid sm:grid-cols-4 flex flex-col w-full overflow-x-hidden`}
+    >
       {countries.map(country => {
         return (
           <Country
             country={country}
             darkMode={darkMode}
-            // activateCountry={activateCountry}
+            updateCountry={updateCountry}
             key={country.flags.png}
           />
         )

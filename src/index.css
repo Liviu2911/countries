@@ -5,7 +5,6 @@
 * {
   outline: none;
 }
-
 .font1 {
   font-family: "Nunito Variable", sans-serif;
 }
@@ -38,4 +37,8 @@
   height: 165px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+}
+
+.back-btn {
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.75);
 }

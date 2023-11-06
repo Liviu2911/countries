@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import Header from "./components/header"
-import "@fontsource-variable/nunito"
 import Loading from "./components/pages/loading"
 import ErrorMessage from "./components/pages/error"
 import Home from "./components/pages/home"
+import "@fontsource-variable/nunito"
 
 export type CountryType = {
   name: { common: string }
@@ -12,6 +12,12 @@ export type CountryType = {
   capital: string[]
   flags: { png: string }
   region: string
+  subregion: string
+  nativeName: { eng: { official: string } }
+  currencies: any
+  languages: any
+  borders: string[]
+  cca3: string
 }
 
 function App() {
@@ -26,8 +32,17 @@ function App() {
     queryFn: getData,
   })
 
-  const [darkMode, setDarkMode] = useState(false)
-  const changeDarkMode = (type: boolean) => setDarkMode(type)
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkmode")
+      ? localStorage.getItem("darkmode") === "dark"
+        ? true
+        : false
+      : false
+  )
+  const changeDarkMode = (type: boolean) => {
+    setDarkMode(type)
+    localStorage.setItem("darkmode", type ? "dark" : "white")
+  }
 
   useEffect(() => {
     document.body.className = `${

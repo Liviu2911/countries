@@ -4,12 +4,12 @@ import { BiChevronDown } from "react-icons/bi"
 
 type Props = {
   darkMode: boolean
-  activeFilter: string
   updateFilter: (region: string) => void
 }
 
-function Filters({ darkMode, activeFilter, updateFilter }: Props) {
+function Filters({ darkMode, updateFilter }: Props) {
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState("")
   const animation = {
     initial: {
       opacity: 0,
@@ -28,16 +28,16 @@ function Filters({ darkMode, activeFilter, updateFilter }: Props) {
     },
   }
   return (
-    <div className="m-16 font1 wg500">
+    <div className="sm:m-16 font1 wg500">
       <button
         onClick={() => setOpen(!open)}
         className={`${
           darkMode
-            ? "bg-stone-800 text-stone-200 hover:text-stone-600"
-            : "bg-white  text-stone-700 hover:text-stone-400"
-        } flex flex-row w-56 justify-between items-center p-5 rounded  transition-3`}
+            ? "bg-stone-800 text-stone-200 sm:hover:text-stone-600"
+            : "bg-white  text-stone-700 sm:hover:text-stone-400"
+        } flex flex-row sm:w-56 w-48 justify-between items-center sm:p-5 p-4 rounded  transition-3`}
       >
-        {activeFilter !== "" ? activeFilter : "Filter by Region"}
+        {active !== "" ? active : "Filter by Region"}
         <span className="text-xl">
           <BiChevronDown />
         </span>
@@ -51,7 +51,7 @@ function Filters({ darkMode, activeFilter, updateFilter }: Props) {
             exit="exit"
             className={`absolute ${
               darkMode ? "bg-stone-800" : "bg-white"
-            } rounded flex flex-col w-56 mt-2 gap-2 py-2 transition-3`}
+            } rounded flex flex-col w-56 mt-2 left-[82px] sm:left-auto gap-2 py-2 transition-3`}
           >
             <button
               onClick={() => updateFilter("Africa")}

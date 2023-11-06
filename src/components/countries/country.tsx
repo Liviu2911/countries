@@ -4,18 +4,18 @@ import { getPop } from "./getpopulation"
 
 type Props = {
   darkMode: boolean
-  // activateCountry: (country: CountryType) => void
+  updateCountry: (country: CountryType) => void
   country: CountryType
 }
 
-function Country({ country, darkMode }: Props) {
+function Country({ country, darkMode, updateCountry }: Props) {
   const { name, flags, region, capital, population } = country
   let pop = getPop(population)
   return (
     <div className="hoverin transition-3 mt-12">
       <button
         className="w-72 mr-auto ml-auto flex flex-col gap-0"
-        // onClick={() => activateCountry(country)}
+        onClick={() => updateCountry(country)}
       >
         <img
           src={flags.png}
